@@ -69,7 +69,7 @@ end
 
 Redmine::MenuManager.map :account_menu do |menu|
   menu.push :my_page,
-            { controller: '/my', action: 'page' },
+            Rails.application.routes.url_helpers.my_page_path,
             if: Proc.new { User.current.logged? }
   menu.push :my_account,
             { controller: '/my', action: 'account' },
