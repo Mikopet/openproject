@@ -13,6 +13,10 @@ ENV SECRET_KEY_BASE=OVERWRITE_ME
 # install node + npm
 RUN curl https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz | tar xzf - -C /usr/local --strip-components=1
 
+# add fresh postgresql repo
+RUN wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > /etc/apt/sources.list.d/pgdg.list
+
 RUN apt-get update -qq && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y  \
 	postgresql-client \
