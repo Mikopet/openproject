@@ -173,6 +173,14 @@ export class WorkPackageChangeset {
     return this.wpFormPromise;
   }
 
+  public saveIfChanged():Promise<WorkPackageResource> {
+    if (this.empty) {
+      return Promise.resolve(this.workPackage);
+    } else {
+      return this.save();
+    }
+  }
+
   public save():Promise<WorkPackageResource> {
     this.inFlight = true;
     const wasNew = this.workPackage.isNew;
